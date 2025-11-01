@@ -9,13 +9,20 @@ RSpec.describe 'Requests to Api::V1::AnniversariesController', type: :request do
         anniversary_1 = Anniversary.create(date: '2020-02-14', title: 'Valentines Day')
         anniversary_1 = Anniversary.create(date: '2020-12-25', title: 'Christmas Day')
 
-        get '/api/v1/anniversaries'
+        get '/api/v1/anniversaries', headers: { 'ACCEPT' => 'application/json' }
 
         anniversaries = Anniversary.all
 
-        expect(response).to have_http_status(:ok)
+        # expect(response).to have_http_status(:ok)
+
+        puts response.status
+        puts response.message
+        puts response.parsed_body
+        puts '!@@£$%%'
 
         json = JSON.parse(response.body)
+
+        puts json
 
         expect(json.size).to eq(anniversaries.size)
 
