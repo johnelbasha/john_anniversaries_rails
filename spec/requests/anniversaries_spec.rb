@@ -4,7 +4,6 @@ RSpec.describe 'Requests to Api::V1::AnniversariesController', type: :request do
   describe 'GET api/v1/anniversaries' do
     context 'without any additional authentication/security layers' do # I have given it this name to ensure I come back and add authentication and other security layers later
       it 'returns all anniversary records' do
-        # anniversaries = FactoryBot.create_list(:anniversary, 3)
         anniversary_1 = Anniversary.create(date: '2020-01-01', title: 'New Year')
         anniversary_1 = Anniversary.create(date: '2020-02-14', title: 'Valentines Day')
         anniversary_1 = Anniversary.create(date: '2020-12-25', title: 'Christmas Day')
@@ -13,16 +12,9 @@ RSpec.describe 'Requests to Api::V1::AnniversariesController', type: :request do
 
         anniversaries = Anniversary.all
 
-        # expect(response).to have_http_status(:ok)
-
-        puts response.status
-        puts response.message
-        puts response.parsed_body
-        puts '!@@£$%%'
+        expect(response).to have_http_status(:ok)
 
         json = JSON.parse(response.body)
-
-        puts json
 
         expect(json.size).to eq(anniversaries.size)
 
